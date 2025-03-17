@@ -14,115 +14,103 @@ import java.util.Objects;
  * Clase que representa un Pokemon con sus atributos. 
 */
 public class Pokemon {
-    private String name;
-    private int pokedexNumber;
-    private String type1;
-    private String type2;
-    private String classification;
-    private double height;
-    private double weight;
-    private String abilities;
-    private int generation;
-    private boolean lengendary;
+    private String nombre;
+    private int numeroPokedex;
+    private String tipo1;
+    private String tipo2;
+    private String clasificacion;
+    private double altura;
+    private double peso;
+    private String habilidades;
+    private int generacion;
+    private boolean legendario;
 
     // Constructor del Pokemon
-    public Pokemon(String name, int pokedexNumber, String type1, String type2, String classification,
-                  double height, double weight, String abilities, int generation, boolean legendary) {
-        this.name = name;
-        this.pokedexNumber = pokedexNumber;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.classification = classification;
-        this.height = height;
-        this.weight = weight;
-        this.abilities = abilities;
-        this.generation = generation;
-        this.legendary = legendary;
+    public Pokemon(String nombre, int numeroPokedex, String tipo1, String tipo2, String clasificacion, 
+                    double altura, double peso, String habilidades, int generacion, boolean legendario)
+
+    public String getNombre() {
+        return nombre;
     }
 
-    // Getters y setters
-    public String getName() {
-        return name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getNumeroPokedex() {
+        return numeroPokedex;
     }
 
-    public int getPokedexNumber() {
-        return pokedexNumber;
+    public void setNumeroPokedex(int numeroPokedex) {
+        this.numeroPokedex = numeroPokedex;
     }
 
-    public void setPokedexNumber(int pokedexNumber) {
-        this.pokedexNumber = pokedexNumber;
+    public String getTipo1() {
+        return tipo1;
     }
 
-    public String getType1() {
-        return type1;
+    public void setTipo1(String tipo1) {
+        this.tipo1 = tipo1;
     }
 
-    public void setType1(String type1) {
-        this.type1 = type1;
+    public String getTipo2() {
+        return tipo2;
     }
 
-    public String getType2() {
-        return type2;
+    public void setTipo2(String tipo2) {
+        this.tipo2 = tipo2;
     }
 
-    public void setType2(String type2) {
-        this.type2 = type2;
+    public String getClasificacion() {
+        return clasificacion;
     }
 
-    public String getClassification() {
-        return classification;
+    public void setClasificacion(String clasificacion) {
+        this.clasificacion = clasificacion;
     }
 
-    public void setClassification(String classification) {
-        this.classification = classification;
+    public double getAltura() {
+        return altura;
     }
 
-    public double getHeight() {
-        return height;
+    public void setAltura(double altura) {
+        this.altura = altura;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    public double getPeso() {
+        return peso;
     }
 
-    public double getWeight() {
-        return weight;
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public String getHabilidades() {
+        return habilidades;
     }
 
-    public String getAbilities() {
-        return abilities;
+    public void setHabilidades(String habilidades) {
+        this.habilidades = habilidades;
     }
 
-    public void setAbilities(String abilities) {
-        this.abilities = abilities;
+    public int getGeneracion() {
+        return generacion;
     }
 
-    public int getGeneration() {
-        return generation;
+    public void setGeneracion(int generacion) {
+        this.generacion = generacion;
     }
 
-    public void setGeneration(int generation) {
-        this.generation = generation;
+    public boolean isLegendario() {
+        return legendario;
     }
 
-    public boolean isLegendary() {
-        return legendary;
-    }
-
-    public void setLegendary(boolean legendary) {
-        this.legendary = legendary;
+    public void setLegendario(boolean legendario) {
+        this.legendario = legendario;
     }
 
     /**
-     * Compara el nombre de 2 Pokemons.
+     * Compara el nombre de 2 Pokemonn para evitar coincidencias
      * @return true si coinciden y false en caso contrario
     */
     @Override
@@ -130,7 +118,7 @@ public class Pokemon {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Pokemon pokemon = (Pokemon) obj;
-        return name.equals(name, pokemon.name);
+        return name.equals(pokemon.name);
     }
 
     /**
