@@ -1,4 +1,5 @@
-package src;
+package com.uvg;
+
 
 /** 
  * Universidad del Valle de Guatemala

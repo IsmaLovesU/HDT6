@@ -1,4 +1,4 @@
-package src;
+package com.uvg;
 
 /** 
  * Universidad del Valle de Guatemala
@@ -49,7 +49,7 @@ public class Controlador {
         
         // Agregar a la colección
         coleccionUsuario.add(nombrePokemon);
-        return "¡Pokémon: " + pokemonName + ", agregado a tu colección!";
+        return "¡Pokémon: " + nombrePokemon + ", agregado a tu colección!";
     }
     
     /**
@@ -103,7 +103,7 @@ public class Controlador {
         for (Map.Entry<String, Pokemon> entry : todosPokemons.entrySet()) {
             String nombre = entry.getKey();
             String tipo1 = entry.getValue().getTipo1();
-            result.add(new AbstractMap.SimpleEntry<>(nombre, type1));
+            result.add(new AbstractMap.SimpleEntry<>(nombre, tipo1));
         }
         
         // Ordenar la lista por tipo1
@@ -119,17 +119,17 @@ public class Controlador {
     
     /**
      * Busca pokémon por habilidad
-     * @param ability habilidad a buscar
+     * @param habilidad habilidad a buscar
      * @return lista de nombres de pokémon con esa habilidad
     */
-    public List<String> BuscarPorHabilidad(String ability) {
+    public List<String> buscarPorHabilidad(String habilidad) {
         List<String> result = new ArrayList<>();
         
         // Buscar pokémon con la habilidad
         for (Map.Entry<String, Pokemon> entry : todosPokemons.entrySet()) {
             Pokemon pokemon = entry.getValue();
             // Verificar si las habilidades contienen la buscada (ignorando mayúsculas/minúsculas)
-            if (pokemon.getAbilities().toLowerCase().contains(habilidad.toLowerCase())) {
+            if (pokemon.getHabilidades().toLowerCase().contains(habilidad.toLowerCase())) {
                 result.add(entry.getKey());
             }
         }
@@ -141,7 +141,7 @@ public class Controlador {
      * Obtiene la cantidad de pokémon en la colección del usuario
      * @return cantidad de pokémon
     */
-    public int getUserCollectionSize() {
+    public int getTamanoColeccionUsuario() {
         return coleccionUsuario.size();
     }
     
@@ -149,7 +149,7 @@ public class Controlador {
      * Obtiene la cantidad total de pokémon
      * @return cantidad total de pokémon
     */
-    public int getTotalPokemonCount() {
+    public int getCantidadTotalPokemon() {
         return todosPokemons.size();
     }
 }

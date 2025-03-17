@@ -1,4 +1,5 @@
-package src;
+package com.uvg;
+
 
 /** 
  * Universidad del Valle de Guatemala
@@ -130,7 +131,7 @@ public class Pokemon {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Pokemon pokemon = (Pokemon) obj;
-        return name.equals(pokemon.nombre);
+        return nombre.equals(pokemon.nombre);
     }
 
     /**

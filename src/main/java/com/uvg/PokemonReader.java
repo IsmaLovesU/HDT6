@@ -1,16 +1,18 @@
-package src;
+package com.uvg;
 
 /** 
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructura de Datos
  * @author: Andres Ismalej 24005
- * @version: 2
+ * @version: 3
  * Ultima modificacion: 16/03/25
 */
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,22 +22,25 @@ public class PokemonReader {
     
     /**
      * Lee los datos de Pokémon desde un archivo CSV
-     * @param filePath ruta del archivo CSV
-     * @param pokemonMap mapa donde se guardarán los pokémon
+     * @param ruta ruta del archivo CSV
+     * @param mapPokemon mapa donde se guardarán los pokémon
      * @return número de pokémon leídos
      */
     public int lectorCSVPokemon(String ruta, Map<String, Pokemon> mapPokemon) {
         int count = 0;
+        int lineNumber = 0;
         
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             // Leer la primera línea (encabezados) y descartarla
             String line = br.readLine();
+            lineNumber++;
             
             // Leer los datos
             while ((line = br.readLine()) != null) {
+                lineNumber++;
                 try {
-                    // Dividir la línea por comas
-                    String[] data = line.split(",");
+                    // Dividir la línea por comas, pero respetando campos entre comillas
+                    String[] data = parseCsvLine(line);
                     
                     // Verificar que hay suficientes columnas
                     if (data.length >= 10) {
@@ -52,16 +57,17 @@ public class PokemonReader {
                         
                         // Crear un nuevo Pokémon y agregarlo al mapa
                         Pokemon pokemon = new Pokemon(
-                            nombre, numeroPokedex, tipo1, tipo2, classificacion,
+                            nombre, numeroPokedex, tipo1, tipo2, clasificacion,
                             altura, peso, habilidades, generacion, legendario
                         );
                         
-                        mapPokemon.put(name, pokemon);
+                        mapPokemon.put(nombre, pokemon);
                         count++;
                     }
-                } catch (NumberFormatException e) {
-                    System.err.println("Error al procesar la línea: " + line);
-                    System.err.println("Error: " + e.getMessage());
+                } catch (Exception e) {
+                    System.err.println("Error al procesar la línea " + lineNumber + ": " + line);
+                    System.err.println("Detalles del error: " + e.getMessage());
+                    // Continuar con la siguiente línea en lugar de detener el proceso
                 }
             }
         } catch (IOException e) {
@@ -69,5 +75,45 @@ public class PokemonReader {
         }
         
         return count;
+    }
+    
+    /**
+     * Método auxiliar para analizar correctamente una línea CSV
+     * @param line línea de texto CSV a analizar
+     * @return array con los campos separados
+     */
+    private String[] parseCsvLine(String line) {
+        List<String> result = new ArrayList<>();
+        boolean inQuotes = false;
+        StringBuilder currentField = new StringBuilder();
+        
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            
+            if (c == '"') {
+                // Si ya estamos en un campo entre comillas y encontramos otra comilla
+                if (inQuotes) {
+                    // Comprobar si la siguiente también es comilla (comillas escapadas)
+                    if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                        currentField.append('"');
+                        i++; // Saltar la siguiente comilla
+                    } else {
+                        inQuotes = false;
+                    }
+                } else {
+                    inQuotes = true;
+                }
+            } else if (c == ',' && !inQuotes) {
+                // Si encontramos una coma fuera de comillas, finaliza el campo actual
+                result.add(currentField.toString());
+                currentField.setLength(0);
+            } else {
+                currentField.append(c);
+            }
+        }
+        
+        result.add(currentField.toString());
+        
+        return result.toArray(new String[0]);
     }
 }
