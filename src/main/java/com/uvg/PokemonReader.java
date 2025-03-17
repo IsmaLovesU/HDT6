@@ -1,10 +1,10 @@
-package com.uvg;
+package src;
 
 /** 
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructura de Datos
  * @author: Andres Ismalej 24005
- * @version: 1
+ * @version: 2
  * Ultima modificacion: 16/03/25
 */
 
