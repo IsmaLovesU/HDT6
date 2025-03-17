@@ -4,7 +4,7 @@ package com.uvg;
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructura de Datos
  * @author: Andres Ismalej 24005
- * @version: 1
+ * @version: 2
  * Ultima modificacion: 12/03/25
 */
 
@@ -25,9 +25,21 @@ public class Pokemon {
     private int generacion;
     private boolean legendario;
 
-    // Constructor del Pokemon
+      // Constructor del Pokemon
     public Pokemon(String nombre, int numeroPokedex, String tipo1, String tipo2, String clasificacion, 
-                    double altura, double peso, String habilidades, int generacion, boolean legendario)
+                double altura, double peso, String habilidades, int generacion, boolean legendario) {
+        this.nombre = nombre;
+        this.numeroPokedex = numeroPokedex;
+        this.tipo1 = tipo1;
+        this.tipo2 = tipo2;
+        this.clasificacion = clasificacion;
+        this.altura = altura;
+        this.peso = peso;
+        this.habilidades = habilidades;
+        this.generacion = generacion;
+        this.legendario = legendario;
+        
+    }
 
     public String getNombre() {
         return nombre;
@@ -118,7 +130,7 @@ public class Pokemon {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Pokemon pokemon = (Pokemon) obj;
-        return name.equals(pokemon.name);
+        return name.equals(pokemon.nombre);
     }
 
     /**
@@ -127,7 +139,7 @@ public class Pokemon {
     */
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(nombre);
     }
 
     /**
@@ -137,16 +149,16 @@ public class Pokemon {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nombre: ").append(name).append("\n");
-        sb.append("Número de Pokédex: ").append(pokedexNumber).append("\n");
-        sb.append("Tipo Primario: ").append(type1).append("\n");
-        sb.append("Tipo Secundario: ").append(type2 != null && !type2.isEmpty() ? type2 : "N/A").append("\n");
-        sb.append("Clasificación: ").append(classification).append("\n");
-        sb.append("Altura (m): ").append(height).append("\n");
-        sb.append("Peso (kg): ").append(weight).append("\n");
-        sb.append("Habilidades: ").append(abilities).append("\n");
-        sb.append("Generación: ").append(generation).append("\n");
-        sb.append("Legendario: ").append(legendary ? "Sí" : "No").append("\n");
+        sb.append("Nombre: ").append(nombre).append("\n");
+        sb.append("Número de Pokédex: ").append(numeroPokedex).append("\n");
+        sb.append("Tipo Primario: ").append(tipo1).append("\n");
+        sb.append("Tipo Secundario: ").append(tipo2 != null && !tipo2.isEmpty() ? tipo2 : "N/A").append("\n");
+        sb.append("Clasificación: ").append(clasificacion).append("\n");
+        sb.append("Altura (m): ").append(altura).append("\n");
+        sb.append("Peso (kg): ").append(peso).append("\n");
+        sb.append("Habilidades: ").append(habilidades).append("\n");
+        sb.append("Generación: ").append(generacion).append("\n");
+        sb.append("Legendario: ").append(legendario ? "Sí" : "No").append("\n");
         return sb.toString();
     }
 }

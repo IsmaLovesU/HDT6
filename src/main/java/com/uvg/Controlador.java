@@ -48,7 +48,7 @@ public class Controlador {
         }
         
         // Agregar a la colección
-        coleccionUsuario.add(nombrePokemono);
+        coleccionUsuario.add(nombrePokemon);
         return "¡Pokémon: " + pokemonName + ", agregado a tu colección!";
     }
     
@@ -73,11 +73,11 @@ public class Controlador {
         List<Map.Entry<String, String>> result = new ArrayList<>();
         
         // Agregar cada pokémon del usuario a la lista
-        for (String name : coleccionUsuario) {
-            Pokemon pokemon = todosPokemons.get(name);
+        for (String nombre : coleccionUsuario) {
+            Pokemon pokemon = todosPokemons.get(nombre);
             if (pokemon != null) {
                 // Crear un par (nombre, tipo1)
-                result.add(new AbstractMap.SimpleEntry<>(name, pokemon.getTipo1()));
+                result.add(new AbstractMap.SimpleEntry<>(nombre, pokemon.getTipo1()));
             }
         }
         
@@ -100,10 +100,10 @@ public class Controlador {
         List<Map.Entry<String, String>> result = new ArrayList<>();
         
         // Agregar cada pokémon a la lista
-        for (Map.Entry<String, Pokemon> entry : allPokemons.entrySet()) {
-            String name = entry.getKey();
-            String type1 = entry.getValue().getType1();
-            result.add(new AbstractMap.SimpleEntry<>(name, type1));
+        for (Map.Entry<String, Pokemon> entry : todosPokemons.entrySet()) {
+            String nombre = entry.getKey();
+            String tipo1 = entry.getValue().getTipo1();
+            result.add(new AbstractMap.SimpleEntry<>(nombre, type1));
         }
         
         // Ordenar la lista por tipo1
@@ -126,10 +126,10 @@ public class Controlador {
         List<String> result = new ArrayList<>();
         
         // Buscar pokémon con la habilidad
-        for (Map.Entry<String, Pokemon> entry : allPokemons.entrySet()) {
+        for (Map.Entry<String, Pokemon> entry : todosPokemons.entrySet()) {
             Pokemon pokemon = entry.getValue();
             // Verificar si las habilidades contienen la buscada (ignorando mayúsculas/minúsculas)
-            if (pokemon.getAbilities().toLowerCase().contains(ability.toLowerCase())) {
+            if (pokemon.getAbilities().toLowerCase().contains(habilidad.toLowerCase())) {
                 result.add(entry.getKey());
             }
         }
@@ -142,7 +142,7 @@ public class Controlador {
      * @return cantidad de pokémon
     */
     public int getUserCollectionSize() {
-        return userCollection.size();
+        return coleccionUsuario.size();
     }
     
     /**
@@ -150,6 +150,6 @@ public class Controlador {
      * @return cantidad total de pokémon
     */
     public int getTotalPokemonCount() {
-        return allPokemons.size();
+        return todosPokemons.size();
     }
 }
